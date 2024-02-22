@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://5gtbe5jdkhg"]
+
+[ext_resource type="Script" path="res://Characters/Enemy.gd" id="1_bg8as"]
+[ext_resource type="Texture2D" uid="uid://clg3tigekqvv2" path="res://Assets/Tiles/tile_0109.png" id="2_gf6lc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n8lsp"]
+size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jcdtt"]
+radius = 107.019
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_bg8as")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+scale = Vector2(0.985365, 1)
+shape = SubResource("RectangleShape2D_n8lsp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_gf6lc")
+
+[node name="Search Area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Search Area"]
+shape = SubResource("CircleShape2D_jcdtt")
+
+[connection signal="body_entered" from="Search Area" to="." method="_on_search_area_body_entered"]
+[connection signal="body_exited" from="Search Area" to="." method="_on_search_area_body_exited"]
